@@ -1,0 +1,59 @@
+
+   FAIL  Tests\Feature\MultiTenancyTest
+  ⨯ it identifies tenant from header and switches connection
+  ⨯ it returns 400 if header is missing
+  ⨯ it returns 404 if tenant is not found
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\MultiTenancyTest > it identifies te…  QueryException   
+  SQLSTATE[08006] [7] connection to server at "pgsql" (172.18.0.2), port 5432 failed: FATAL:  the database system is shutting down (Connection: pgsql, SQL: select c.relname as name, n.nspname as schema, pg_total_relation_size(c.oid) as size, obj_description(c.oid, 'pg_class') as comment from pg_class c, pg_namespace n where c.relkind in ('r', 'p') and n.oid = c.relnamespace and n.nspname not in ('pg_catalog', 'information_schema') order by c.relname)
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connectors/Connector.php:66
+     62▕      */
+     63▕     protected function createPdoConnection($dsn, $username, #[\SensitiveParameter] $password, $options)
+     64▕     {
+     65▕         return version_compare(phpversion(), '8.4.0', '<')
+  ➜  66▕             ? new PDO($dsn, $username, $password, $options)
+     67▕             : PDO::connect($dsn, $username, $password, $options); /** @phpstan-ignore staticMethod.notFound (PHP 8.4) */
+     68▕     }
+     69▕ 
+     70▕     /**
+
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\MultiTenancyTest > it returns 400 i…  QueryException   
+  SQLSTATE[08006] [7] connection to server at "pgsql" (172.18.0.2), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections? (Connection: pgsql, SQL: select exists (select 1 from pg_class c, pg_namespace n where n.nspname = 'public' and c.relname = 'migrations' and c.relkind in ('r', 'p') and n.oid = c.relnamespace))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connectors/Connector.php:66
+     62▕      */
+     63▕     protected function createPdoConnection($dsn, $username, #[\SensitiveParameter] $password, $options)
+     64▕     {
+     65▕         return version_compare(phpversion(), '8.4.0', '<')
+  ➜  66▕             ? new PDO($dsn, $username, $password, $options)
+     67▕             : PDO::connect($dsn, $username, $password, $options); /** @phpstan-ignore staticMethod.notFound (PHP 8.4) */
+     68▕     }
+     69▕ 
+     70▕     /**
+
+
+  ────────────────────────────────────────────────────────────────────────────  
+   FAILED  Tests\Feature\MultiTenancyTest > it returns 404 i…  QueryException   
+  SQLSTATE[08006] [7] connection to server at "pgsql" (172.18.0.2), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections? (Connection: pgsql, SQL: select exists (select 1 from pg_class c, pg_namespace n where n.nspname = 'public' and c.relname = 'migrations' and c.relkind in ('r', 'p') and n.oid = c.relnamespace))
+
+  at vendor/laravel/framework/src/Illuminate/Database/Connectors/Connector.php:66
+     62▕      */
+     63▕     protected function createPdoConnection($dsn, $username, #[\SensitiveParameter] $password, $options)
+     64▕     {
+     65▕         return version_compare(phpversion(), '8.4.0', '<')
+  ➜  66▕             ? new PDO($dsn, $username, $password, $options)
+     67▕             : PDO::connect($dsn, $username, $password, $options); /** @phpstan-ignore staticMethod.notFound (PHP 8.4) */
+     68▕     }
+     69▕ 
+     70▕     /**
+
+
+
+  Tests:    3 failed (0 assertions)
+  Duration: 1288.05s
+
