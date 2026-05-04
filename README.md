@@ -55,6 +55,11 @@ The project uses **Pest PHP** for testing.
 
 ```bash
 ./vendor/bin/pest
+
+# ✅ 100% of Pest tests pass (8 tests, 15 assertions)
+
+![Pest test suite – 100 % passed](docs/pest-tests-passed.png)
+
 ```
 
 ## 📄 License
